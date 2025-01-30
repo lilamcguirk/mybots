@@ -11,3 +11,7 @@ def Create_World():
 
 	pyrosim.End()
 
+def Create_Robot():
+	pyrosim.Start_URDF("body.urdf")
+
+	pyrosim.End()
