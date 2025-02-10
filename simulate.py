@@ -23,12 +23,12 @@ for i in range(100):
 	bodyIndex = robotId,
 	jointName = b'Link0_Link1',
 	controlMode = p.POSITION_CONTROL,
-	targetPosition = np.pi/4,
+	targetPosition = -np.pi/4,
 	maxForce = 500)
 
 	pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
-        jointName = b'Link0_Link1',
+        jointName = b'Link0_Link2',
         controlMode = p.POSITION_CONTROL,
         targetPosition = np.pi/4,
         maxForce = 500)
