@@ -3,6 +3,7 @@ import pybullet as p
 import time
 import pyrosim.pyrosim as pyrosim
 import numpy as np
+import random
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -12,6 +13,15 @@ robotId = p.loadURDF("body.urdf")
 planeId = p.loadURDF("plane.urdf")
 p.loadSDF("world.sdf")
 pyrosim.Prepare_To_Simulate(robotId)
+
+num_iterations = 100
+
+targetAngles = np.sin(np.linspace(0, 2 * np.pi, num_iterations))
+
+np.save('data/target_angles.npy', targetAngles)
+
+exit()
+
 backLegSensorValues = np.zeros(100)
 frontLegSensorValues = np.zeros(100)
 for i in range(100):
@@ -23,15 +33,15 @@ for i in range(100):
 	bodyIndex = robotId,
 	jointName = b'Link0_Link1',
 	controlMode = p.POSITION_CONTROL,
-	targetPosition = -np.pi/4,
-	maxForce = 500)
+	targetPosition = random.uniform(-np.pi/2.0,np.pi/2.0),
+	maxForce = 140)
 
 	pyrosim.Set_Motor_For_Joint(
         bodyIndex = robotId,
         jointName = b'Link0_Link2',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = np.pi/4,
-        maxForce = 500)
+        targetPosition = random.uniform(-np.pi/2.0, np.pi/2.0),
+        maxForce = 140)
 
 	time.sleep(1/60)
 
